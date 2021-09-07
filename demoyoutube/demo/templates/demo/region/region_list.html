@@ -1,0 +1,48 @@
+{% extends  "demo/base.html" %}
+{% block content %}
+
+<div class="table-responsive-sm p-4">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                
+                <th scope="col">name</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for region in region_list %}
+
+            <tr class="table-info">
+                
+                <td><a href = "{% url 'detail_region' region.id %}"></a>{{region.name}}</a></td>
+                
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>        
+
+    <div class="pagination">
+        {% if region_list.has_previous %}
+        <a href="{% url	'region' %}?page={{ region_list.previous_page_number}}">Précédente</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ region_list.number }} sur {{ region_list.paginator.num_pages }}
+        </span>
+
+        {% if region_list.has_next %}
+        <a href="{% url 'region' %}?page={{ region_list.next_page_number}}">Suivante</a>
+        {% endif %}
+    </div>
+    <div class="text-right">
+        <a href= "{% url 'create_region' %}" class="btn btn-info">Ajouter une region</a>
+    </div>|
+
+</div>
+
+
+
+{% endblock %}
